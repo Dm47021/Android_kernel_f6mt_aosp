@@ -126,11 +126,16 @@ static int vibrator_clock_off(void)
 
 static int vibratror_pwm_gpio_OnOFF(int OnOFF)
 {
+    int rc = 0;
 
     if (OnOFF) {
-        gpio_set_value(GPIO_LIN_MOTOR_PWM, 1);
+		rc = gpio_request(GPIO_LIN_MOTOR_PWM, "lin_motor_pwm");
+		if (unlikely(rc < 0)) {
+			printk("%s:GPIO_LIN_MOTOR_PWM(%d) request failed(%d)\n", __func__, GPIO_LIN_MOTOR_PWM, rc);
+			return rc;
+		}
     } else {
-        gpio_set_value(GPIO_LIN_MOTOR_PWM, 0);
+        gpio_free(GPIO_LIN_MOTOR_PWM);
     }
     return 0;
 }
@@ -216,7 +221,7 @@ static void vibrator_ic_enable_set(int enable)
 /*
 ** Called to disable amp (disable output force)
 */
-VibeStatus ImmVibeSPI_ForceOut_AmpDisable(VibeUInt8 nActuatorIndex)
+IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_AmpDisable(VibeUInt8 nActuatorIndex)
 {
     if (g_bAmpEnabled)
     {
@@ -245,7 +250,7 @@ VibeStatus ImmVibeSPI_ForceOut_AmpDisable(VibeUInt8 nActuatorIndex)
 /*
 ** Called to enable amp (enable output force)
 */
-VibeStatus ImmVibeSPI_ForceOut_AmpEnable(VibeUInt8 nActuatorIndex)
+IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_AmpEnable(VibeUInt8 nActuatorIndex)
 {
     if (!g_bAmpEnabled)
     {
@@ -259,7 +264,7 @@ VibeStatus ImmVibeSPI_ForceOut_AmpEnable(VibeUInt8 nActuatorIndex)
 #if defined (CONFIG_MACH_LGE_L9II_COMMON)
 		vibrator_power(1);
         vibratror_pwm_gpio_OnOFF(1);
-		vibrator_pwm_set(1, 127, GP_CLK_N_DEFAULT);
+		vibrator_pwm_set(1, 0, GP_CLK_N_DEFAULT);
 		vibrator_ic_enable_set(1);
 #else
 		pm8xxx_vib_set(vib_dev, 1, 0);
@@ -304,7 +309,6 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_Initialize(void)
 		printk("%s:GPIO_LIN_MOTOR_PWM(%d) request failed(%d)\n", __func__, GPIO_LIN_MOTOR_PWM, rc);
 		return rc;
 	}
-        gpio_direction_output(GPIO_LIN_MOTOR_PWM, 0);
 
     vibrator_clock_init();
 #endif	
@@ -345,6 +349,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_Terminate(void)
     /* Set PWM frequency */
     PWM_CTRL  = 0;                  /* 13Mhz / (0 + 1) = 13MHz */
     PWM_PERIOD = PWM_DUTY_MAX;      /* 13Mhz / (PWM_DUTY_MAX + 1) = 22.4kHz */
+
     /* Set duty cycle to 50% */
     PWM_DUTY = (PWM_DUTY_MAX+1)>>1; /* Duty cycle range = [0, PWM_DUTY_MAX] */
 #endif
@@ -416,6 +421,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_SetSamples(VibeUInt8 nActuatorIndex
 IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_SetFrequency(VibeUInt8 nActuatorIndex, VibeUInt16 nFrequencyParameterID, VibeUInt32 nFrequencyParameterValue)
 {
     /* This function is not called for ERM device */
+
     return VIBE_S_SUCCESS;
 }
 #endif
