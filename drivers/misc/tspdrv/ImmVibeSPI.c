@@ -26,8 +26,8 @@
 ** under the License.
 ** =========================================================================
 */
-//[LGE_CHANGE_S] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
-#if defined (CONFIG_MACH_LGE_L9II_COMMON)
+//                                                                             
+#ifdef CONFIG_MACH_LGE_L9II_OPEN_EU
 #include <linux/io.h>
 #include <linux/err.h>
 #include <linux/gpio.h>
@@ -43,7 +43,7 @@
 #include "tspdrv_util.h"
 extern struct pm8xxx_vib *vib_dev;
 #endif
-//[LGE_CHANGE_E] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
+//                                                                             
 
 #ifdef IMMVIBESPIAPI
 #undef IMMVIBESPIAPI
@@ -59,8 +59,8 @@ extern struct pm8xxx_vib *vib_dev;
 
 static bool g_bAmpEnabled = false;
 
-//[LGE_CHANGE_S] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
-#if defined (CONFIG_MACH_LGE_L9II_COMMON)
+//                                                                             
+#ifdef CONFIG_MACH_LGE_L9II_OPEN_EU
 /* gpio and clock control for vibrator */
 #define REG_WRITEL(value, reg)				writel(value, (MSM_CLK_CTL_BASE + reg))
 #define REG_READL(reg)						readl((MSM_CLK_CTL_BASE + reg))
@@ -216,7 +216,7 @@ static void vibrator_ic_enable_set(int enable)
 	gpio_set_value(GPIO_HAPTIC_EN, enable);
 }
 #endif
-//[LGE_CHANGE_E] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
+//                                                                             
 
 /*
 ** Called to disable amp (disable output force)
@@ -225,14 +225,10 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_AmpDisable(VibeUInt8 nActuatorIndex
 {
     if (g_bAmpEnabled)
     {
-#if !defined (CONFIG_MACH_LGE_L9II_COMMON)
         DbgOut((KERN_DEBUG "ImmVibeSPI_ForceOut_AmpDisable.\n"));
-#else
-	DbgOut((DBL_INFO, "ImmVibeSPI_ForceOut_AmpDisable.\n"));
-#endif
 
-//[LGE_CHANGE_S] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
-#if defined (CONFIG_MACH_LGE_L9II_COMMON)
+//                                                                             
+#ifdef CONFIG_MACH_LGE_L9II_OPEN_EU
 		vibrator_ic_enable_set(0);
 		vibrator_pwm_set(0, 0, GP_CLK_N_DEFAULT);
 		vibratror_pwm_gpio_OnOFF(0);
@@ -240,7 +236,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_AmpDisable(VibeUInt8 nActuatorIndex
 #else
 		pm8xxx_vib_set(vib_dev, 0, 0);
 #endif
-//[LGE_CHANGE_E] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
+//                                                                             
 		g_bAmpEnabled = false;
     }
 
@@ -254,14 +250,10 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_AmpEnable(VibeUInt8 nActuatorIndex)
 {
     if (!g_bAmpEnabled)
     {
-#if !defined (CONFIG_MACH_LGE_L9II_COMMON)
         DbgOut((KERN_DEBUG "ImmVibeSPI_ForceOut_AmpEnable.\n"));
-#else
-	DbgOut((DBL_INFO, "ImmVibeSPI_ForceOut_AmpEnable.\n"));
-#endif
 
-//[LGE_CHANGE_S] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
-#if defined (CONFIG_MACH_LGE_L9II_COMMON)
+//                                                                             
+#ifdef CONFIG_MACH_LGE_L9II_OPEN_EU
 		vibrator_power(1);
         vibratror_pwm_gpio_OnOFF(1);
 		vibrator_pwm_set(1, 0, GP_CLK_N_DEFAULT);
@@ -269,7 +261,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_AmpEnable(VibeUInt8 nActuatorIndex)
 #else
 		pm8xxx_vib_set(vib_dev, 1, 0);
 #endif
-//[LGE_CHANGE_E] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
+//                                                                             
         g_bAmpEnabled = true;
     }
 
@@ -281,7 +273,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_AmpEnable(VibeUInt8 nActuatorIndex)
 */
 IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_Initialize(void)
 {
-#if defined (CONFIG_MACH_LGE_L9II_COMMON)
+#ifdef CONFIG_MACH_LGE_L9II_OPEN_EU
     int rc;
 #endif
 
@@ -289,7 +281,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_Initialize(void)
 
     g_bAmpEnabled = true;   /* to force ImmVibeSPI_ForceOut_AmpDisable disabling the amp */
 
-#if defined (CONFIG_MACH_LGE_L9II_COMMON)
+#ifdef CONFIG_MACH_LGE_L9II_OPEN_EU
 	rc = gpio_request(GPIO_HAPTIC_PWR_EN, "haptic_pwr_en");
 	if (unlikely(rc < 0)) {
 		printk("%s:GPIO_HAPTIC_PWR_EN(%d) request failed(%d)\n", __func__, GPIO_HAPTIC_PWR_EN, rc);
@@ -329,11 +321,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_Initialize(void)
 */
 IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_Terminate(void)
 {
-#if !defined (CONFIG_MACH_LGE_L9II_COMMON)
     DbgOut((KERN_DEBUG "ImmVibeSPI_ForceOut_Terminate.\n"));
-#else
-    DbgOut((DBL_INFO, "ImmVibeSPI_ForceOut_Terminate.\n"));
-#endif
 
     /* 
     ** Disable amp.
@@ -343,8 +331,8 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_Terminate(void)
     */
     ImmVibeSPI_ForceOut_AmpDisable(0);
 
-//[LGE_CHANGE_S] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
-#if defined (CONFIG_MACH_LGE_L9II_COMMON)
+//                                                                             
+#ifdef CONFIG_MACH_LGE_L9II_OPEN_EU
 #if 0
     /* Set PWM frequency */
     PWM_CTRL  = 0;                  /* 13Mhz / (0 + 1) = 13MHz */
@@ -354,7 +342,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_Terminate(void)
     PWM_DUTY = (PWM_DUTY_MAX+1)>>1; /* Duty cycle range = [0, PWM_DUTY_MAX] */
 #endif
 #endif
-//[LGE_CHANGE_E] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
+//                                                                             
 
     return VIBE_S_SUCCESS;
 }
@@ -387,8 +375,8 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_SetSamples(VibeUInt8 nActuatorIndex
             /* Unexpected bit depth */
             return VIBE_E_FAIL;
     }
-//[LGE_CHANGE_S] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
-#if defined (CONFIG_MACH_LGE_L9II_COMMON)
+//                                                                             
+#ifdef CONFIG_MACH_LGE_L9II_OPEN_EU
 	/* Check the Force value with Max and Min force value */
 	if (nForce > 127)
 		nForce = 127;
@@ -397,7 +385,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_SetSamples(VibeUInt8 nActuatorIndex
 
 	vibrator_pwm_set(1, nForce, GP_CLK_N_DEFAULT);
 #else
-//[LGE_CHANGE_E] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
+//                                                                             
     if (nForce <= 0)
     {                
         pm8xxx_vib_set(vib_dev, 0, 0);        
@@ -407,9 +395,9 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_ForceOut_SetSamples(VibeUInt8 nActuatorIndex
         /* 0 ~ 31 */
         pm8xxx_vib_set(vib_dev, 1, (nForce * 31) / 128 + 1);
     }
-//[LGE_CHANGE_S] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
+//                                                                             
 #endif
-//[LGE_CHANGE_E] 2013.03.13 daewon1004.kim@lge.com l9ii use the pwm mode moter.
+//                                                                             
 
     return VIBE_S_SUCCESS;
 }
@@ -433,11 +421,7 @@ IMMVIBESPIAPI VibeStatus ImmVibeSPI_Device_GetName(VibeUInt8 nActuatorIndex, cha
 {
     if ((!szDevName) || (nSize < 1)) return VIBE_E_FAIL;
 
-#if !defined (CONFIG_MACH_LGE_L9II_COMMON)
     DbgOut((KERN_DEBUG "ImmVibeSPI_Device_GetName.\n"));
-#else
-    DbgOut((DBL_INFO, "ImmVibeSPI_Device_GetName.\n"));
-#endif
 
     strncpy(szDevName, "FX3", nSize-1);
     szDevName[nSize - 1] = '\0';    /* make sure the string is NULL terminated */

@@ -40,16 +40,16 @@
 #include "tspdrv.h"
 #include "ImmVibeSPI.c"
 #if defined(VIBE_DEBUG) && defined(VIBE_RECORD)
-#include "tspdrvRecorder.c"
+#include <tspdrvRecorder.c>
 #endif
-// LGE_CHANGE_S [younglae.kim@lge.com] 2013-02-25, add to control vib_drv of pm8038
-#if !defined(CONFIG_MACH_LGE_L9II_COMMON)
+//                                                                                 
+#if !defined(CONFIG_MACH_LGE_L9II_OPEN_EU)
 #include "tspdrv_util.h"
 #include <linux/slab.h>
 
 struct pm8xxx_vib *vib_dev;
 #endif
-// LGE_CHANGE_E [younglae.kim@lge.com] 2013-02-25
+//                                               
 
 /* Device name and version information */
 #define VERSION_STR " v3.4.55.9\n"                  /* DO NOT CHANGE - this is auto-generated */
@@ -246,6 +246,7 @@ static ssize_t write(struct file *file, const char *buf, size_t count, loff_t *p
         
         /* Check actuator index */
         if (NUM_ACTUATORS <= pInputBuffer->nActuatorIndex)
+
         {
             DbgOut((KERN_ERR "tspdrv: invalid actuator index.\n"));
             i += (SPI_HEADER_SIZE + pInputBuffer->nBufferSize);
@@ -376,7 +377,7 @@ static int vibrator_probe(struct platform_device *pdev)
 {
     int nRet, i;   /* initialized below */
 
-#if !defined(CONFIG_MACH_LGE_L9II_COMMON)
+#if !defined(CONFIG_MACH_LGE_L9II_OPEN_EU)
     u8 val;
 
     vib_dev = kzalloc(sizeof(*vib_dev), GFP_KERNEL);
@@ -424,7 +425,7 @@ static int vibrator_probe(struct platform_device *pdev)
         g_SamplesBuffer[i].actuatorSamples[1].nBufferSize = 0;
     }
 
-#if !defined(CONFIG_MACH_LGE_L9II_COMMON)
+#if !defined(CONFIG_MACH_LGE_L9II_OPEN_EU)
     nRet = pm8xxx_vib_read_u8(vib_dev, &val, VIB_DRV);
     if (nRet < 0)
         goto err_read_vib;
@@ -482,7 +483,7 @@ static int vibrator_remove(struct platform_device *pdev)
     misc_deregister(&miscdev);
 #endif
 
-#if !defined(CONFIG_MACH_LGE_L9II_COMMON)
+#if !defined(CONFIG_MACH_LGE_L9II_OPEN_EU)
     kfree(vib_dev);
 #endif
 
