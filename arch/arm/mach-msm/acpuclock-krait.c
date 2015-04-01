@@ -60,7 +60,7 @@ static struct drv_data {
 	struct device *dev;
 } drv;
 
-static unsigned long acpuclk_krait_get_rate(int cpu)
+unsigned long acpuclk_krait_get_rate(int cpu)
 {
 	return drv.scalable[cpu].cur_speed->khz;
 }
