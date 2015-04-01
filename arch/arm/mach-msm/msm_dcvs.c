@@ -1253,8 +1253,10 @@ int msm_dcvs_idle(int dcvs_core_id, enum msm_core_idle_state state,
 				MSM_DCVS_SCM_IDLE_ENTER, 0, 0, &r0, &r1);
 		if (ret < 0 && ret != -13)
 			__err("Error (%d) sending idle enter for %s\n",
-					ret, core->core_name);
+				ret, core->core_name);
+#if 0
 		trace_msm_dcvs_idle("idle_enter_exit", core->core_name, 1);
+#endif
 		break;
 
 	case MSM_DCVS_IDLE_EXIT:
@@ -1264,10 +1266,12 @@ int msm_dcvs_idle(int dcvs_core_id, enum msm_core_idle_state state,
 			__err("Error (%d) sending idle exit for %s\n",
 					ret, core->core_name);
 		start_slack_timer(core, timer_interval_us);
+#if 0
 		trace_msm_dcvs_idle("idle_enter_exit", core->core_name, 0);
 		trace_msm_dcvs_iowait("iowait", core->core_name, iowaited);
 		trace_msm_dcvs_slack_time("slack_timer_dcvs", core->core_name,
 							timer_interval_us);
+#endif
 		break;
 	}
 
