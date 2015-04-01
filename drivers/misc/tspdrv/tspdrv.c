@@ -42,14 +42,15 @@
 #if defined(VIBE_DEBUG) && defined(VIBE_RECORD)
 #include <tspdrvRecorder.c>
 #endif
-//                                                                                 
-#if !defined(CONFIG_MACH_LGE_L9II_OPEN_EU)
+// LGE_CHANGE_S [younglae.kim@lge.com] 2013-02-25, add to control vib_drv of pm8038
+#if !defined(CONFIG_MACH_LGE_L9II_COMMON)
 #include "tspdrv_util.h"
 #include <linux/slab.h>
 
 struct pm8xxx_vib *vib_dev;
 #endif
-//                                               
+#include"imm_timed_output.h"
+// LGE_CHANGE_E [younglae.kim@lge.com] 2013-02-25
 
 /* Device name and version information */
 #define VERSION_STR " v3.4.55.9\n"                  /* DO NOT CHANGE - this is auto-generated */
@@ -246,7 +247,6 @@ static ssize_t write(struct file *file, const char *buf, size_t count, loff_t *p
         
         /* Check actuator index */
         if (NUM_ACTUATORS <= pInputBuffer->nActuatorIndex)
-
         {
             DbgOut((KERN_ERR "tspdrv: invalid actuator index.\n"));
             i += (SPI_HEADER_SIZE + pInputBuffer->nBufferSize);
@@ -377,7 +377,7 @@ static int vibrator_probe(struct platform_device *pdev)
 {
     int nRet, i;   /* initialized below */
 
-#if !defined(CONFIG_MACH_LGE_L9II_OPEN_EU)
+#if !defined(CONFIG_MACH_LGE_L9II_COMMON)
     u8 val;
 
     vib_dev = kzalloc(sizeof(*vib_dev), GFP_KERNEL);
@@ -425,7 +425,7 @@ static int vibrator_probe(struct platform_device *pdev)
         g_SamplesBuffer[i].actuatorSamples[1].nBufferSize = 0;
     }
 
-#if !defined(CONFIG_MACH_LGE_L9II_OPEN_EU)
+#if !defined(CONFIG_MACH_LGE_L9II_COMMON)
     nRet = pm8xxx_vib_read_u8(vib_dev, &val, VIB_DRV);
     if (nRet < 0)
         goto err_read_vib;
@@ -443,8 +443,10 @@ err_read_vib :
     kfree(vib_dev);
     return nRet;
 #else
-	return 0;
-#endif
+        ImmVibe_timed_output();
+
+    return 0;  
+#endif     
 }
 
 static int vibrator_suspend(struct platform_device *pdev, pm_message_t state) 
@@ -483,7 +485,7 @@ static int vibrator_remove(struct platform_device *pdev)
     misc_deregister(&miscdev);
 #endif
 
-#if !defined(CONFIG_MACH_LGE_L9II_OPEN_EU)
+#if !defined(CONFIG_MACH_LGE_L9II_COMMON)
     kfree(vib_dev);
 #endif
 
