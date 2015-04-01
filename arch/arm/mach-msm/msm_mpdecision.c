@@ -33,6 +33,7 @@
 #include <linux/delay.h>
 
 #define MPDEC_TAG "[MPDEC]: "
+#define MSM_MPDEC_STARTDELAY 40000
 #define MSM_MPDEC_DELAY 500
 #define MSM_MPDEC_CPU_UPDELAY 200
 #define MSM_MPDEC_CPU_DOWNDELAY 200
@@ -75,6 +76,9 @@ static int mp_decision(void)
 	cputime64_t this_time = 0;
 
 	current_time = ktime_to_ms(ktime_get());
+	if (current_time <= MSM_MPDEC_STARTDELAY)
+		return MSM_MPDEC_IDLE;
+
 	if (first_call) {
 		first_call = false;
 	} else {
@@ -222,7 +226,7 @@ static void msm_mpdec_late_resume(struct early_suspend *h)
 }
 
 static struct early_suspend msm_mpdec_early_suspend_handler = {
-        .level = EARLY_SUSPEND_LEVEL_BLANK_SCREEN,
+	.level = EARLY_SUSPEND_LEVEL_BLANK_SCREEN,
 	.suspend = msm_mpdec_early_suspend,
 	.resume = msm_mpdec_late_resume,
 };
@@ -247,3 +251,4 @@ static int __init msm_mpdec(void)
 }
 
 late_initcall(msm_mpdec);
+
