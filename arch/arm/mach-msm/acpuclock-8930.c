@@ -149,6 +149,11 @@ static struct l2_level l2_freq_tbl[] __initdata = {
 	[13] = { { 1080000, HFPLL, 1, 0x28 }, LVL_HIGH, 1150000, 7 },
 	[14] = { { 1134000, HFPLL, 1, 0x2A }, LVL_HIGH, 1150000, 7 },
 	[15] = { { 1188000, HFPLL, 1, 0x2C }, LVL_HIGH, 1150000, 7 },
+// Overclock
+#ifdef CONFIG_GT_L2_OC
+	[16] = { { 1242000, HFPLL, 1, 0x30 }, LVL_HIGH, 1150000, 7 },
+	[17] = { { 1296000, HFPLL, 1, 0x32 }, LVL_HIGH, 1150000, 7 },
+#endif
 	{ }
 };
 
@@ -169,6 +174,13 @@ static struct acpu_level acpu_freq_tbl_slow[] __initdata = {
 	{ 0, {  1080000, HFPLL, 1, 0x28 }, L2(15), 1175000 },
 	{ 1, {  1134000, HFPLL, 1, 0x2A }, L2(15), 1175000 },
 	{ 1, {  1188000, HFPLL, 1, 0x2C }, L2(15), 1200000 },
+// Overclock
+#ifdef CONFIG_GT_CPU_OC
+	{ 1, {  1242000, HFPLL, 1, 0x2E }, L2(15), 1200000 },
+	{ 1, {  1296000, HFPLL, 1, 0x30 }, L2(15), 1225000 },
+	{ 1, {  1350000, HFPLL, 1, 0x32 }, L2(15), 1225000 },
+	{ 1, {  1404000, HFPLL, 1, 0x34 }, L2(15), 1237500 },
+#endif
 	{ 0, { 0 } }
 };
 
@@ -189,6 +201,13 @@ static struct acpu_level acpu_freq_tbl_nom[] __initdata = {
 	{ 0, {  1080000, HFPLL, 1, 0x28 }, L2(15), 1150000 },
 	{ 1, {  1134000, HFPLL, 1, 0x2A }, L2(15), 1150000 },
 	{ 1, {  1188000, HFPLL, 1, 0x2C }, L2(15), 1175000 },
+// Overclock
+#ifdef CONFIG_GT_CPU_OC
+	{ 1, {  1242000, HFPLL, 1, 0x2E }, L2(15), 1175000 },
+	{ 1, {  1296000, HFPLL, 1, 0x30 }, L2(15), 1200000 },
+	{ 1, {  1350000, HFPLL, 1, 0x32 }, L2(15), 1200000 },
+	{ 1, {  1404000, HFPLL, 1, 0x34 }, L2(15), 1212500 },
+#endif
 	{ 0, { 0 } }
 };
 
@@ -209,6 +228,13 @@ static struct acpu_level acpu_freq_tbl_fast[] __initdata = {
 	{ 0, {  1080000, HFPLL, 1, 0x28 }, L2(15), 1100000 },
 	{ 1, {  1134000, HFPLL, 1, 0x2A }, L2(15), 1100000 },
 	{ 1, {  1188000, HFPLL, 1, 0x2C }, L2(15), 1125000 },
+// Overclock
+#ifdef CONFIG_GT_CPU_OC
+	{ 1, {  1242000, HFPLL, 1, 0x2E }, L2(15), 1125000 },
+	{ 1, {  1296000, HFPLL, 1, 0x30 }, L2(15), 1150000 },
+	{ 1, {  1350000, HFPLL, 1, 0x32 }, L2(15), 1150000 },
+	{ 1, {  1404000, HFPLL, 1, 0x34 }, L2(15), 1162500 },
+#endif
 	{ 0, { 0 } }
 };
 

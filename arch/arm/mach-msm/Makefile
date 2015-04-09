@@ -397,3 +397,7 @@ ifdef CONFIG_MACH_LGE
 obj-$(CONFIG_ARCH_MSM8930) += devices-8930.o
 endif
 
+ifdef CONFIG_TURBO_BOOST
+obj-$(CONFIG_TURBO_BOOST) += msm_turbo.o
+endif
+
