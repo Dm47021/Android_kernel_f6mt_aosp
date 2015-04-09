@@ -400,4 +400,7 @@ endif
 ifdef CONFIG_TURBO_BOOST
 obj-$(CONFIG_TURBO_BOOST) += msm_turbo.o
 endif
+ifdef CONFIG_MSM_CPUFREQ_LIMITER
+obj-$(CONFIG_MSM_CPUFREQ_LIMITER) += cpufreq_limit.o
+endif
 
