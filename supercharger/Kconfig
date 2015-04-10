@@ -70,3 +70,11 @@ config GPU_OVERCLOCK
 	  APQ8064 GPU overclocking 
 
 
+config MSM_KGSL_SIMPLE_GOV
+	bool "Simple KGSL GPU govenor for Qualcomm Adreno xxx devices"
+	default n
+	depends on MSM_KGSL
+	---help---
+	  A simple KGSL GPU govenor for Qualcom Adreno XXX devices
+
+
