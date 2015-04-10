@@ -37,6 +37,12 @@ config TURBO_BOOST
 	  than stock maximum.  When more than 2 cores are active, the clock
 	  is limited to stock max speeds
 
+config INTELLI_PLUG
+        bool "Enable intelli-plug cpu hotplug driver"
+        default n
+        help
+          Generic Intelli-plug cpu hotplug driver for ARM SOCs
+
 choice
 	prompt "MSM Thermal Monitor Types"
 	default THERMAL_MONITOR
@@ -69,12 +75,5 @@ config GPU_OVERCLOCK
 	help
 	  APQ8064 GPU overclocking 
 
-
-config MSM_KGSL_SIMPLE_GOV
-	bool "Simple KGSL GPU govenor for Qualcomm Adreno xxx devices"
-	default n
-	depends on MSM_KGSL
-	---help---
-	  A simple KGSL GPU govenor for Qualcom Adreno XXX devices
 
 
