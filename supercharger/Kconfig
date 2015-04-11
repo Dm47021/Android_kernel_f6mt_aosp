@@ -75,5 +75,11 @@ config GPU_OVERCLOCK
 	help
 	  APQ8064 GPU overclocking 
 
+config HAS_MACH_MEMUTILS
+	default y
+	bool "Motorola MSM memcpy enhancements"
+	help
+	Faster memcpy performance for Krait
+
 
 
