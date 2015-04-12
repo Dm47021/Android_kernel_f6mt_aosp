@@ -87,3 +87,11 @@ config COMPILE_WITH_LINARO_O3_OPTIMIZATIONS
        help
        Builds faster Code
 
+config KERNEL_MODE_NEON
+	bool "Support for NEON in kernel mode"
+	default n
+	depends on NEON
+	help
+	  Say Y to include support for NEON in kernel mode.
+
+
