@@ -81,5 +81,9 @@ config HAS_MACH_MEMUTILS
 	help
 	Faster memcpy performance for Krait
 
-
+config COMPILE_WITH_LINARO_O3_OPTIMIZATIONS
+       default n
+       bool "build with O3 Maximum Optimization level"
+       help
+       Builds faster Code
 

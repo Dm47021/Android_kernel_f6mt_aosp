@@ -12,6 +12,8 @@ EXTRA_CFLAGS += -DCONFIG_BMM_USE_PLATFORM_DATA
 #available floating calculation
 KBUILD_CFLAGS  += -mfloat-abi=softfp
 
+EXTRA_CFLAGS += -Wno-maybe-uninitialized
+
 obj-$(CONFIG_SENSORS_BMA2X2)	+= bma2x2_driver.o
 obj-$(CONFIG_SENSORS_BMA250)    += bma250_driver.o
 obj-$(CONFIG_SENSORS_BMM050)   += bmm050_driver.o bmm050.o
