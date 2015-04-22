@@ -384,6 +384,7 @@ extern struct cpufreq_governor cpufreq_gov_interactive;
 #endif
 
 
+
 /*********************************************************************
  *                     FREQUENCY TABLE HELPERS                       *
  *********************************************************************/
