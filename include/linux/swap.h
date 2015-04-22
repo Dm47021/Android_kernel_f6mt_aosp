@@ -347,7 +347,7 @@ extern struct page *swapin_readahead(swp_entry_t, gfp_t,
 extern atomic_long_t nr_swap_pages;
 extern long total_swap_pages;
 
-/* Swap 50% full? */
+/* Swap 50% full? Release swapcache more aggressively.. */
 static inline bool vm_swap_full(void)
 {
 	return atomic_long_read(&nr_swap_pages) * 2 < total_swap_pages;
@@ -382,10 +382,9 @@ extern void grab_swap_token(struct mm_struct *);
 extern void __put_swap_token(struct mm_struct *);
 extern void disable_swap_token(struct mem_cgroup *memcg);
 
-/* Only allow swap token to have effect if swap is full */
 static inline int has_swap_token(struct mm_struct *mm)
 {
-	return (mm == swap_token_mm && vm_swap_full());
+	return (mm == swap_token_mm);
 }
 
 static inline void put_swap_token(struct mm_struct *mm)
