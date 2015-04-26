@@ -37,11 +37,24 @@ config TURBO_BOOST
 	  than stock maximum.  When more than 2 cores are active, the clock
 	  is limited to stock max speeds
 
+choice
+
+       prompt "MPDECISION IMPLAMENTATION"
+       default INTELLI_PLUG
+
 config INTELLI_PLUG
         bool "Enable intelli-plug cpu hotplug driver"
         default n
         help
           Generic Intelli-plug cpu hotplug driver for ARM SOCs
+
+config MSM_MPDECISION_SHOWP1984
+        bool "Enable showp1984's msm mpdecision cpu hotplug driver"
+        default n
+        help
+          Generic high performance cpu hotplug driver for ARM SOCs
+
+endchoice 
 
 choice
 	prompt "MSM Thermal Monitor Types"
@@ -70,7 +83,7 @@ config THERMAL_MONITOR
 endchoice 
 
 config GPU_OVERCLOCK
-	bool "Enable GPU Overclocking option"
+	bool "Enable GPU Overclocking 450MHZ option"
 	default n
 	help
 	  APQ8064 GPU overclocking 
