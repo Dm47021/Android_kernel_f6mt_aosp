@@ -56,6 +56,7 @@ struct cpu_load_data {
 
 static DEFINE_PER_CPU(struct cpu_load_data, cpuload);
 
+#if defined(CONFIG_CPUQUIET_FRAMEWORK)
 unsigned int get_rq_info(void)
 {
 	unsigned long flags = 0;
@@ -71,6 +72,7 @@ unsigned int get_rq_info(void)
         return rq;
 }
 EXPORT_SYMBOL(get_rq_info);
+#endif
 
 static inline u64 get_cpu_idle_time_jiffy(unsigned int cpu, u64 *wall)
 {

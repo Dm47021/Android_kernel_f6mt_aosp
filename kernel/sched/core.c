@@ -2238,7 +2238,9 @@ unsigned long avg_cpu_nr_running(unsigned int cpu)
 	return ave_nr_running;
 }
 EXPORT_SYMBOL(avg_cpu_nr_running);
-#else
+#endif
+
+#if defined(CONFIG_CPUQUIET_FRAMEWORK)
 unsigned long avg_nr_running(void)
 {
 	unsigned long i, sum = 0;

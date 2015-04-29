@@ -365,10 +365,12 @@ struct rq {
 #endif
 	int skip_clock_update;
 
+#if defined(CONFIG_CPUQUIET_FRAMEWORK)
         /* time-based average load */
 	u64 nr_last_stamp;
         unsigned int ave_nr_running;
 	seqcount_t ave_seqcnt;
+#endif
 
 	/* capture load from *all* tasks on this cpu: */
 	struct load_weight load;
@@ -973,7 +975,8 @@ static inline unsigned int do_avg_nr_running(struct rq *rq)
 
 	return ave_nr_running;
 }
-#else
+#endif
+#if defined(CONFIG_CPUQUIET_FRAMEWORK)
 /* 27 ~= 134217728ns = 134.2ms
  * 26 ~=  67108864ns =  67.1ms
  * 25 ~=  33554432ns =  33.5ms
@@ -1013,7 +1016,9 @@ static inline void inc_nr_running(struct rq *rq)
 	nr_stats->ave_nr_running = do_avg_nr_running(rq);
 	nr_stats->nr_last_stamp = rq->clock_task;
 #endif
+#if defined(CONFIG_CPUQUIET_FRAMEWORK)
         rq->nr_last_stamp = rq->clock_task;
+#endif
 	rq->nr_running++;
 #ifdef CONFIG_INTELLI_PLUG
 	write_seqcount_end(&nr_stats->ave_seqcnt);
