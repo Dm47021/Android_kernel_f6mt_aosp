@@ -52,9 +52,6 @@ static DEFINE_PER_CPU(struct cpu_freq, cpu_freq_info);
 #ifdef CONFIG_TURBO_BOOST
 extern int msm_turbo(int);
 #endif
-#ifdef CONFIG_SUPERCHARGER_BOOST
-extern int supercharger_boost(int);
-#endif
 
 static int set_cpu_freq(struct cpufreq_policy *policy, unsigned int new_freq)
 {
@@ -66,7 +63,7 @@ static int set_cpu_freq(struct cpufreq_policy *policy, unsigned int new_freq)
         struct sched_param param = { .sched_priority = MAX_RT_PRIO-1 };
 
 #ifdef CONFIG_TURBO_BOOST
-	new_freq = supercharger_boost(new_freq);
+	new_freq = msm_turbo(new_freq);
 #endif
 
 	if (limit->limits_init) {
