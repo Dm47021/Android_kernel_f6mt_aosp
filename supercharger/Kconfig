@@ -37,6 +37,13 @@ config TURBO_BOOST
 	  than stock maximum.  When more than 2 cores are active, the clock
 	  is limited to stock max speeds
 
+config SUPERCHARGER_BOOST
+        bool "Enable Supercharger boost option"
+        default y
+        help
+          This option allows overclocking of 2 cores to higher clock rate
+	  than Turbo maximum.  When more than 2 cores are active, the clock
+	  is limited to turbo max speeds
 
 menu "Hotplug implementation type"
 
