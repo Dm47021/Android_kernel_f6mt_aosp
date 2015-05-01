@@ -21,14 +21,15 @@
 #include <linux/cpumask.h>
 
 #ifdef CONFIG_TURBO_BOOST
-#define STOCK_CPU_MAX_SPEED     1404000  //MODIFIED FOR F6
+#define STOCK_CPU_MAX_SPEED     1500000
+#define CPU_BOOST_SPEED         1800000  //300MHZ Supercharged boost if 2 cores online @ 1.5ghz 
 #endif
 
 int msm_turbo(int cpufreq)
 {
 	if (num_online_cpus() > 2) {
 		if (cpufreq > STOCK_CPU_MAX_SPEED)
-			cpufreq = STOCK_CPU_MAX_SPEED;
+			cpufreq = CPU_BOOST_SPEED;
         }
 	return cpufreq;
 }
@@ -47,6 +48,6 @@ module_init(msm_turbo_boost_init);
 module_exit(msm_turbo_boost_exit);
 
 MODULE_LICENSE("PROPRIETARY");
-MODULE_AUTHOR("Paul Reioux <reioux@gmail.com>");
+MODULE_AUTHOR("Paul Reioux <reioux@gmail.com>"); //modified by DM47021
 MODULE_DESCRIPTION("MSM turbo boost module");
 
