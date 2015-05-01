@@ -123,6 +123,9 @@ static struct msm_bus_paths bw_level_tbl[] __initdata = {
 	[5] = BW_MBPS(3600), /* At least 450 MHz on bus. */
 	[6] = BW_MBPS(3936), /* At least 492 MHz on bus. */
 	[7] = BW_MBPS(4264), /* At least 533 MHz on bus. */
+#ifdef CONFIG_BUS_OVERCLOCK
+	[8] = BW_MBPS(4800), /* At least 600 MHz on bus. */
+#endif
 };
 
 static struct msm_bus_scale_pdata bus_scale_data __initdata = {
@@ -153,6 +156,7 @@ static struct l2_level l2_freq_tbl[] __initdata = {
 #ifdef CONFIG_GT_L2_OC
 	[16] = { { 1242000, HFPLL, 1, 0x30 }, LVL_HIGH, 1150000, 7 },
 	[17] = { { 1296000, HFPLL, 1, 0x32 }, LVL_HIGH, 1150000, 7 },
+        [18] = { { 1350000, HFPLL, 1, 0x34 }, LVL_HIGH, 1150000, 7 },
 #endif
 	{ }
 };
@@ -180,6 +184,8 @@ static struct acpu_level acpu_freq_tbl_slow[] __initdata = {
 	{ 1, {  1400000, HFPLL, 1, 0x32 }, L2(15), 1237500 },
         { 1, {  1500000, HFPLL, 1, 0x34 }, L2(15), 1250000 },
         { 1, {  1600000, HFPLL, 1, 0x36 }, L2(15), 1275000 },
+        { 1, {  1700000, HFPLL, 1, 0x38 }, L2(15), 1275000 },
+        { 1, {  1800000, HFPLL, 1, 0x40 }, L2(15), 1275000 },
 #endif
 	{ 0, { 0 } }
 };
@@ -207,6 +213,8 @@ static struct acpu_level acpu_freq_tbl_nom[] __initdata = {
 	{ 1, {  1400000, HFPLL, 1, 0x32 }, L2(15), 1212500 },
         { 1, {  1500000, HFPLL, 1, 0x34 }, L2(15), 1225000 },
         { 1, {  1600000, HFPLL, 1, 0x36 }, L2(15), 1250000 },
+        { 1, {  1700000, HFPLL, 1, 0x38 }, L2(15), 1250000 },
+        { 1, {  1800000, HFPLL, 1, 0x40 }, L2(15), 1250000 },
 #endif
 	{ 0, { 0 } }
 };
@@ -234,6 +242,8 @@ static struct acpu_level acpu_freq_tbl_fast[] __initdata = {
 	{ 1, {  1400000, HFPLL, 1, 0x32 }, L2(15), 1162500 },
         { 1, {  1500000, HFPLL, 1, 0x34 }, L2(15), 1175000 },
         { 1, {  1600000, HFPLL, 1, 0x36 }, L2(15), 1200000 },
+        { 1, {  1700000, HFPLL, 1, 0x38 }, L2(15), 1250000 },
+        { 1, {  1800000, HFPLL, 1, 0x40 }, L2(15), 1250000 },
 #endif
 	{ 0, { 0 } }
 };

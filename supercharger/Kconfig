@@ -10,6 +10,12 @@ config GT_CPU_OC
 	help
 	  This will enable CPU overclocking.
 
+config BUS_OVERCLOCK
+        bool "600mhz system bus overclock"
+        default y
+        help
+          This will overclock the bus to 600mhz
+
 config QUAD_CORES_SOC_STAT
 	bool "Overall statistic details for quadcore SOCs"
 	depends on CPU_FREQ_STAT
