@@ -34,7 +34,12 @@
 #include <mach/camera.h>
 #include <linux/syscalls.h>
 #include <linux/hrtimer.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 
 #include <mach/cpuidle.h>
 DEFINE_MUTEX(ctrl_cmd_lock);

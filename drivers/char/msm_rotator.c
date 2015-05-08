@@ -28,7 +28,13 @@
 #include <linux/file.h>
 #include <linux/major.h>
 #include <linux/regulator/consumer.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/sync.h>
 #include <linux/sw_sync.h>
 

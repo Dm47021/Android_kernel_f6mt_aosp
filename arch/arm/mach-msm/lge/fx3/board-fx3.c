@@ -80,8 +80,14 @@
 #include <mach/msm_xo.h>
 #include <mach/restart.h>
 
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#include <mach/ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
 #include <mach/ion.h>
+#endif
+
 #include <mach/mdm2.h>
 #include <mach/msm_rtb.h>
 #include <linux/fmem.h>

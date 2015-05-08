@@ -24,7 +24,12 @@
 #include <linux/msm_mdp.h>
 #include <linux/memory_alloc.h>
 #include <mach/hardware.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 
 #ifdef CONFIG_MSM_BUS_SCALING
 #include <mach/msm_bus.h>

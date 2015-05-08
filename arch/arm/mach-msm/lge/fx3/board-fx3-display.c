@@ -22,8 +22,14 @@
 #include <mach/board.h>
 #include <mach/gpiomux.h>
 #include <mach/socinfo.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/ion-legacy.h>
+#include <mach/ion-legacy.h>
+#else
 #include <linux/ion.h>
 #include <mach/ion.h>
+#endif
 
 #include "devices.h"
 

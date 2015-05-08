@@ -24,7 +24,13 @@
 
 #include <mach/board.h>
 #include <media/msm_camera.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <mach/iommu_domains.h>
 
 #define CONFIG_MSM_CAMERA_DEBUG
