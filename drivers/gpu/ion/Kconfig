@@ -18,7 +18,7 @@ config ION_MSM
 	  Choose this option if you wish to use ion on an MSM target.
 
 menuconfig ION_LEGACY
-	tristate "Ion Memory Manager For pre 4.2 blobs"
+	tristate "Legacy Ion Memory Manager For pre 4.2 Camera blobs"
 	select GENERIC_ALLOCATOR
 	select DMA_SHARED_BUFFER
 	help
