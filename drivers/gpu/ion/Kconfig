@@ -12,7 +12,7 @@ config ION_TEGRA
 	  Choose this option if you wish to use ion on an nVidia Tegra.
 
 config ION_MSM
-	tristate "Legacy Ion for MSM"
+	tristate "Ion for MSM"
 	depends on ARCH_MSM && ION
 	help
 	  Choose this option if you wish to use ion on an MSM target.
