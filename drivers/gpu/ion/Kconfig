@@ -12,7 +12,20 @@ config ION_TEGRA
 	  Choose this option if you wish to use ion on an nVidia Tegra.
 
 config ION_MSM
-	tristate "Ion for MSM"
+	tristate "Legacy Ion for MSM"
 	depends on ARCH_MSM && ION
+	help
+	  Choose this option if you wish to use ion on an MSM target.
+
+menuconfig ION_LEGACY
+	tristate "Ion Memory Manager For pre 4.2 blobs"
+	select GENERIC_ALLOCATOR
+	select DMA_SHARED_BUFFER
+	help
+	  Chose this option to enable the Legacy ION Memory Manager.
+
+config ION_MSM_LEGACY
+	tristate "Legacy Ion for MSM"
+	depends on ARCH_MSM && ION_LEGACY
 	help
 	  Choose this option if you wish to use ion on an MSM target.

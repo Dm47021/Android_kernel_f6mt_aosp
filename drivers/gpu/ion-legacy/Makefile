@@ -1,0 +1,2 @@
+obj-$(CONFIG_ION_LEGACY) +=	ion.o ion_heap.o ion_system_heap.o ion_carveout_heap.o ion_iommu_heap.o ion_cp_heap.o
+obj-$(CONFIG_ION_MSM_LEGACY) += msm/
