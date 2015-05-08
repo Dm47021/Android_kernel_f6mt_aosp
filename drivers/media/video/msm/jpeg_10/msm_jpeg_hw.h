@@ -15,7 +15,13 @@
 
 #include <media/msm_jpeg.h>
 #include "msm_jpeg_hw_reg.h"
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/ion-legacy.h>
+#else
 #include <linux/ion.h>
+#endif
+
 #include <mach/iommu_domains.h>
 
 struct msm_jpeg_hw_buf {

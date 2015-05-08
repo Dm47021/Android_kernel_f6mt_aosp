@@ -13,7 +13,13 @@
 
 #include <linux/bitmap.h>
 #include <linux/completion.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/ion-legacy.h>
+#else
 #include <linux/ion.h>
+#endif
+
 #include <linux/kthread.h>
 #include <linux/list.h>
 #include <linux/mutex.h>

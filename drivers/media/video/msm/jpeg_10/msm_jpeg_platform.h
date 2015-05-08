@@ -15,7 +15,13 @@
 
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/ion-legacy.h>
+#else
 #include <linux/ion.h>
+#endif
+
 #include <linux/iommu.h>
 #include <mach/iommu.h>
 
