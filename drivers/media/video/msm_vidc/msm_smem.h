@@ -14,7 +14,11 @@
 #define _MSM_SMEM_H_
 
 #include <linux/types.h>
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 
 enum smem_type {
 	SMEM_ION,

@@ -17,7 +17,12 @@
 
 #include <media/videobuf2-core.h>
 #include <mach/iommu_domains.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 
 struct videobuf2_mapping {
 	unsigned int count;

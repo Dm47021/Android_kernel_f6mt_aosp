@@ -27,7 +27,13 @@
 #include <linux/hash.h>
 #include <linux/msm_ion.h>
 #include <mach/msm_smd.h>
-#include <mach/ion.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
+#include <linux/msm_ion.h>
+#endif
+
 #include <linux/scatterlist.h>
 #include <linux/fs.h>
 #include <linux/uaccess.h>

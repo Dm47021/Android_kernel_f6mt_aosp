@@ -28,7 +28,11 @@
 #include <linux/time.h>
 #endif
 
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 
 #define BIT(nr)   (1UL << (nr))
 

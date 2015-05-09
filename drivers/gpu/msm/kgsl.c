@@ -25,7 +25,14 @@
 #include <linux/rbtree.h>
 #include <linux/ashmem.h>
 #include <linux/major.h>
+
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/io.h>
 #include <mach/socinfo.h>
 #include <linux/mman.h>

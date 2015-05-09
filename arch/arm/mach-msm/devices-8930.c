@@ -14,7 +14,13 @@
 #include <linux/kernel.h>
 #include <linux/platform_device.h>
 #include <asm/io.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <mach/msm_iomap.h>
 #include <mach/irqs-8930.h>
 #include <mach/rpm.h>

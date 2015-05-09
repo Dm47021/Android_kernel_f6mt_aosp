@@ -24,7 +24,13 @@
 #include <linux/debugfs.h>
 #include <linux/list.h>
 #include <linux/slab.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <asm/ioctls.h>
 #include <asm/atomic.h>
 #include "q6audio_common.h"

@@ -14,8 +14,13 @@
 
 #include <mach/qdsp6v2/apr.h>
 #include <sound/apr_audio.h>
+
 #ifdef CONFIG_MSM_MULTIMEDIA_USE_ION
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 #endif
 
 #define IN                      0x000

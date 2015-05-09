@@ -15,7 +15,13 @@
 #define _WFD_ENC_SUBDEV_
 
 #include <linux/list.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <media/v4l2-subdev.h>
 #include <media/videobuf2-core.h>
 #define VENC_MAGIC_IOCTL 'V'

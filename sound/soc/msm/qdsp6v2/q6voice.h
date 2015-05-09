@@ -13,7 +13,12 @@
 #define __QDSP6VOICE_H__
 
 #include <mach/qdsp6v2/apr.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 
 #define MAX_VOC_PKT_SIZE 642
 #define SESSION_NAME_LEN 20

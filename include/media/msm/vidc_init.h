@@ -13,7 +13,13 @@
 
 #ifndef VIDC_INIT_H
 #define VIDC_INIT_H
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <media/msm/vidc_type.h>
 #include <media/msm/vcd_property.h>
 

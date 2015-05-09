@@ -16,7 +16,13 @@
 #include <linux/dma-mapping.h>
 #include <linux/errno.h>
 #include <linux/file.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/msm_kgsl.h>
 #include <linux/spinlock.h>
 #include <linux/types.h>

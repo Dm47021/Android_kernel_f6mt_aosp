@@ -28,7 +28,14 @@
 #include <linux/debugfs.h>
 #include <linux/delay.h>
 #include <linux/earlysuspend.h>
+
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/list.h>
 #include <linux/slab.h>
 #include <asm/atomic.h>

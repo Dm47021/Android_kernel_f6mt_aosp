@@ -37,7 +37,14 @@
 #include <mach/msm_smd.h>
 #include <mach/msm_dcvs.h>
 #include <mach/msm_rtb.h>
+
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include "clock.h"
 #include "pm.h"
 #include "devices.h"

@@ -14,7 +14,12 @@
 #ifndef MDSS_FB_H
 #define MDSS_FB_H
 
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/list.h>
 #include <linux/msm_mdp.h>
 #include <linux/types.h>

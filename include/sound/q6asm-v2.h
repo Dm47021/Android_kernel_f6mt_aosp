@@ -16,7 +16,12 @@
 #include <mach/msm_subsystem_map.h>
 #include <sound/apr_audio-v2.h>
 #include <linux/list.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 
 #define IN                      0x000
 #define OUT                     0x001

@@ -15,7 +15,14 @@
 #include <linux/list.h>
 #include <linux/platform_device.h>
 #include <linux/msm_rotator.h>
+
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/gpio.h>
 #include <linux/coresight.h>
 #include <linux/avtimer.h>

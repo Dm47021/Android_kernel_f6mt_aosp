@@ -15,7 +15,13 @@
 
 #include <media/msm_gemini.h>
 #include "msm_gemini_hw_reg.h"
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <mach/iommu_domains.h>
 
 struct msm_gemini_hw_buf {

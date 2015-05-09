@@ -13,7 +13,12 @@
 #ifndef _VCD_CORE_H_
 #define _VCD_CORE_H_
 
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <media/msm/vcd_api.h>
 #include "vcd_ddl_api.h"
 

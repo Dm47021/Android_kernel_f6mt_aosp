@@ -13,7 +13,11 @@
 #ifndef _MPQ_DMX_PLUGIN_COMMON_H
 #define _MPQ_DMX_PLUGIN_COMMON_H
 
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 
 #include "dvbdev.h"
 #include "dmxdev.h"

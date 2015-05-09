@@ -10,7 +10,13 @@
  * GNU General Public License for more details.
  *
  */
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <mach/msm_memtypes.h>
 #include "vcd_ddl.h"
 #include "vcd_ddl_shared_mem.h"

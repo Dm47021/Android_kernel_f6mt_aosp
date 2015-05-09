@@ -14,7 +14,13 @@
 #define _VIDEO_720P_RESOURCE_TRACKER_H_
 
 #include <linux/regulator/consumer.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include "vcd_res_tracker_api.h"
 #ifdef CONFIG_MSM_BUS_SCALING
 #include <mach/msm_bus.h>

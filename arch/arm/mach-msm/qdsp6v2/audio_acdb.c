@@ -15,7 +15,13 @@
 #include <linux/miscdevice.h>
 #include <linux/mutex.h>
 #include <linux/uaccess.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/mm.h>
 #include <mach/qdsp6v2/audio_acdb.h>
 #include <linux/slab.h>

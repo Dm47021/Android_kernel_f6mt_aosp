@@ -15,7 +15,13 @@
 #include <linux/platform_device.h>
 #include <linux/regulator/machine.h>
 #include <linux/regulator/consumer.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <mach/irqs.h>
 #include <mach/dma.h>
 #include <asm/mach/mmc.h>

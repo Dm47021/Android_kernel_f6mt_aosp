@@ -28,7 +28,13 @@
 #include <linux/list.h>
 #include <linux/mutex.h>
 #include <linux/io.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/types.h>
 #include <linux/clk.h>
 #include <linux/qseecom.h>

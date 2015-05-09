@@ -15,7 +15,13 @@
 
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/iommu.h>
 void msm_gemini_platform_p2v(struct file  *file,
 				struct ion_handle **ionhandle);

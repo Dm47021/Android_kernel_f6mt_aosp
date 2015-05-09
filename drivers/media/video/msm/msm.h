@@ -44,7 +44,13 @@
 #include <mach/camera.h>
 #include <mach/iommu.h>
 #include <media/msm_isp.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
+
 #include <linux/iommu.h>
 #include <media/msm_gestures.h>
 

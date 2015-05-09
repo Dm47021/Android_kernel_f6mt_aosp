@@ -15,7 +15,12 @@
 
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
+
+#if defined(CONFIG_ION_LEGACY) 
+#include <linux/msm_ion-legacy.h>
+#else
 #include <linux/msm_ion.h>
+#endif
 
 int msm_mercury_platform_clk_enable(void);
 int msm_mercury_platform_clk_disable(void);
